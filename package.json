@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-wsystem",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "n8n node for the W System EU business data API: EU VAT (VIES), EORI, company registry, sanctions screening and KYB",
 	"license": "MIT",
 	"homepage": "https://github.com/zifengw/n8n-nodes-wsystem",
