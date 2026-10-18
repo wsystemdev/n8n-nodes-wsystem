@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-wsystem",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "n8n node for the W System EU business data API: EU VAT (VIES), EORI, company registry, sanctions screening and KYB",
 	"license": "MIT",
 	"homepage": "https://github.com/zifengw/n8n-nodes-wsystem",
@@ -15,7 +15,7 @@
 		"eu"
 	],
 	"author": {
-		"name": "W System Hungary Kft.",
+		"name": "W System",
 		"email": "zifeng@wsystem.dev"
 	},
 	"repository": {

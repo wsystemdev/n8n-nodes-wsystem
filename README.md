@@ -32,4 +32,4 @@ Built with `@n8n/node-cli`, n8n Nodes API v1. Tested against n8n 1.x / 2.x.
 - [n8n community nodes docs](https://docs.n8n.io/integrations/#community-nodes)
 
 ## License
-MIT © W System Hungary Kft.
+MIT © W System
