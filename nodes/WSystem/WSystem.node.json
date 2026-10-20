@@ -4,7 +4,7 @@
 	"codexVersion": "1.0",
 	"categories": ["Finance & Accounting", "Data & Storage"],
 	"resources": {
-		"primaryDocumentation": [{ "url": "https://github.com/zifengw/n8n-nodes-wsystem#readme" }],
+		"primaryDocumentation": [{ "url": "https://github.com/wsystemdev/n8n-nodes-wsystem#readme" }],
 		"credentialDocumentation": [{ "url": "https://wsystem.dev/llms.txt" }]
 	}
 }
