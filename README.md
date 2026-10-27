@@ -28,7 +28,7 @@ For more volume add a **W System API** credential with your API key (sent as `X-
 Built with `@n8n/node-cli`, n8n Nodes API v1. Tested against n8n 1.x / 2.x.
 
 ## Resources
-- [API docs / OpenAPI](https://api.wsystem.dev/docs) · [llms.txt](https://wsystem.dev/llms.txt)
+- [API docs / OpenAPI](https://api.wsystem.dev/docs?ref=n8n-github) · [llms.txt](https://wsystem.dev/llms.txt)
 - [n8n community nodes docs](https://docs.n8n.io/integrations/#community-nodes)
 
 ## License
