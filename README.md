@@ -2,7 +2,7 @@
 
 n8n community node for the [W System EU Business Data API](https://wsystem.dev) (`https://api.wsystem.dev`).
 
-[Installation](#installation) · [Operations](#operations) · [Credentials](#credentials) · [Compatibility](#compatibility) · [Resources](#resources)
+[Installation](#installation) · [Operations](#operations) · [Credentials](#credentials) · [Workflow template](#workflow-template-read-incoming-e-invoices-from-email) · [Compatibility](#compatibility) · [Resources](#resources)
 
 ## Installation
 In n8n: **Settings → Community Nodes → Install** and enter `n8n-nodes-wsystem`.
@@ -23,6 +23,9 @@ See the [n8n community nodes installation guide](https://docs.n8n.io/integration
 E-Invoice input: paste the XML, or pick **Base64 File** and feed it from **Extract From File → Move File to Base64 String** (works for XML and ZUGFeRD/Factur-X PDFs, e.g. invoice attachments from an email trigger).
 
 The node is `usableAsTool`, so AI Agent nodes can call it.
+
+## Workflow template: read incoming e-invoices from email
+[`examples/read-incoming-einvoices-from-email.json`](examples/read-incoming-einvoices-from-email.json) needs no community node: import it (**Workflows → Import from File**), set your IMAP credential, and every XML or PDF attachment (XRechnung, ZUGFeRD/Factur-X, UBL, CII) goes to `POST /einvoice/parse` as the raw file. Non-invoice files are skipped, and each invoice becomes one row (number, date, seller, VAT ID, currency, totals, IBAN) you can send on to Google Sheets or your accounting tool. It runs on the free tier; paste a free key into the `X-API-Key` header for more volume.
 
 ## Credentials
 Optional. Without credentials the node uses the free tier (20 calls/day per IP).

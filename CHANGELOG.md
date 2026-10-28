@@ -1,4 +1,6 @@
 # Changelog
+## Unreleased
+- Workflow template examples/read-incoming-einvoices-from-email.json (IMAP attachments to /einvoice/parse via the HTTP Request node, no community node needed) + test/template_check.mjs.
 ## 0.2.0
 - New E-Invoice resource: Parse (read an incoming UBL/CII/XRechnung/ZUGFeRD/Factur-X invoice into JSON) and Validate (EN 16931 + XRechnung rules). Input as XML text or base64 file (XML or PDF).
 ## 0.1.4
