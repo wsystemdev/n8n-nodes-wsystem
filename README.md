@@ -17,6 +17,10 @@ See the [n8n community nodes installation guide](https://docs.n8n.io/integration
 | Company | Look Up (FR, NO, FI, CZ, PL, EE registers; GLEIF elsewhere) | `GET /company` |
 | Sanction | Screen (EU, UN, OFAC SDN, UK) | `GET /sanctions/screen` |
 | KYB | Check (VAT + registry + sanctions → pass/review/fail) | `POST /kyb/check` |
+| E-Invoice | Parse (UBL, CII, XRechnung, ZUGFeRD/Factur-X PDF → JSON: parties, totals, VAT, IBAN, lines) | `POST /einvoice/parse` |
+| E-Invoice | Validate (official EN 16931 + XRechnung rules, with rule IDs and fix hints) | `POST /einvoice/validate` |
+
+E-Invoice input: paste the XML, or pick **Base64 File** and feed it from **Extract From File → Move File to Base64 String** (works for XML and ZUGFeRD/Factur-X PDFs, e.g. invoice attachments from an email trigger).
 
 The node is `usableAsTool`, so AI Agent nodes can call it.
 

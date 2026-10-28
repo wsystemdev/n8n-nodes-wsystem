@@ -75,7 +75,7 @@ export class WSystem implements INodeType {
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description:
-			'Validate EU VAT (VIES) and EORI numbers, look up official company registers, screen sanctions lists and run KYB checks',
+			'Validate EU VAT (VIES) and EORI numbers, look up official company registers, screen sanctions lists, run KYB checks, and read or validate incoming e-invoices (XRechnung, ZUGFeRD, Factur-X, UBL, CII)',
 		defaults: { name: 'W System' },
 		usableAsTool: true,
 		inputs: [NodeConnectionTypes.Main],
@@ -94,6 +94,7 @@ export class WSystem implements INodeType {
 				default: 'vat',
 				options: [
 					{ name: 'Company', value: 'company' },
+					{ name: 'E-Invoice', value: 'einvoice' },
 					{ name: 'EORI', value: 'eori' },
 					{ name: 'KYB', value: 'kyb' },
 					{ name: 'Sanction', value: 'sanctions' },
@@ -116,6 +117,26 @@ export class WSystem implements INodeType {
 					description: 'Validate up to 100 EU VAT numbers in one request',
 					method: 'POST',
 					url: '/verify/batch',
+				},
+			]),
+			op('einvoice', [
+				{
+					name: 'Parse',
+					value: 'parse',
+					action: 'Read an incoming e-invoice into JSON',
+					description:
+						'Read a UBL, CII, XRechnung or ZUGFeRD/Factur-X PDF invoice into JSON (parties, totals, VAT, IBAN, lines)',
+					method: 'POST',
+					url: '/einvoice/parse',
+				},
+				{
+					name: 'Validate',
+					value: 'validate',
+					action: 'Validate an e-invoice against EN 16931',
+					description:
+						'Check a UBL, CII, XRechnung or ZUGFeRD/Factur-X PDF invoice against the official EN 16931 (and XRechnung) rules',
+					method: 'POST',
+					url: '/einvoice/validate',
 				},
 			]),
 			op('eori', [
@@ -158,6 +179,57 @@ export class WSystem implements INodeType {
 					url: '/kyb/check',
 				},
 			]),
+			{
+				displayName: 'Input',
+				name: 'inputType',
+				type: 'options',
+				default: 'xml',
+				options: [
+					{ name: 'XML Text', value: 'xml', description: 'The invoice XML as a string' },
+					{
+						name: 'Base64 File',
+						value: 'base64',
+						description:
+							'An XML or PDF (ZUGFeRD/Factur-X) file as base64, e.g. from Extract From File: Move File to Base64 String',
+					},
+				],
+				displayOptions: { show: { resource: ['einvoice'] } },
+			},
+			{
+				displayName: 'Invoice XML',
+				name: 'xml',
+				type: 'string',
+				required: true,
+				default: '',
+				typeOptions: { rows: 6 },
+				placeholder: '<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2">...',
+				description: 'UBL Invoice/CreditNote or UN/CEFACT CII XML',
+				displayOptions: { show: { resource: ['einvoice'], inputType: ['xml'] } },
+				routing: { send: { type: 'body', property: 'xml' } },
+			},
+			{
+				displayName: 'File (Base64)',
+				name: 'base64',
+				type: 'string',
+				required: true,
+				default: '',
+				description: 'Base64 content of an XML or ZUGFeRD/Factur-X PDF invoice file',
+				displayOptions: { show: { resource: ['einvoice'], inputType: ['base64'] } },
+				routing: { send: { type: 'body', property: 'base64' } },
+			},
+			{
+				displayName: 'Rules',
+				name: 'rules',
+				type: 'options',
+				default: 'auto',
+				options: [
+					{ name: 'Auto (XRechnung Rules When the Invoice Is an XRechnung)', value: 'auto' },
+					{ name: 'EN 16931 Only', value: 'en16931' },
+					{ name: 'XRechnung', value: 'xrechnung' },
+				],
+				displayOptions: show('einvoice', 'validate'),
+				routing: { send: { type: 'query', property: 'rules' } },
+			},
 			{
 				displayName: 'VAT Number',
 				name: 'vat',

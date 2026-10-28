@@ -1,7 +1,7 @@
 {
 	"name": "n8n-nodes-wsystem",
-	"version": "0.1.4",
-	"description": "n8n node for the W System EU business data API: EU VAT (VIES), EORI, company registry, sanctions screening and KYB",
+	"version": "0.2.0",
+	"description": "n8n node for the W System EU business data API: EU VAT (VIES), EORI, company registry, sanctions screening, KYB, and reading/validating incoming e-invoices (XRechnung, ZUGFeRD, Factur-X)",
 	"license": "MIT",
 	"homepage": "https://github.com/wsystemdev/n8n-nodes-wsystem",
 	"keywords": [
@@ -12,7 +12,10 @@
 		"eori",
 		"kyb",
 		"sanctions",
-		"eu"
+		"eu",
+		"e-invoice",
+		"xrechnung",
+		"zugferd"
 	],
 	"author": {
 		"name": "W System",
